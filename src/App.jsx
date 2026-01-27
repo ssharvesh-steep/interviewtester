@@ -78,24 +78,47 @@ function App() {
             {isAdmin ? 'ADMIN MODE' : (candidateName ? `CANDIDATE: ${candidateName}` : 'ID: UNKNOWN')}
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>
-            <a
-              href={import.meta.env.VITE_DOWNLOAD_URL_MACOS || "#"}
-              download
-              className="btn-icon"
-              title="Download for macOS"
-              style={{ textDecoration: 'none', fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.1)' }}
-            >
-              <span style={{ color: 'var(--primary)', fontWeight: 600 }}> macOS</span>
-            </a>
-            <a
-              href={import.meta.env.VITE_DOWNLOAD_URL_WINDOWS || "#"}
-              download
-              className="btn-icon"
-              title="Download for Windows"
-              style={{ textDecoration: 'none', fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.1)' }}
-            >
-              <span style={{ color: 'var(--primary)', fontWeight: 600 }}>⊞ Windows</span>
-            </a>
+            {import.meta.env.VITE_DOWNLOAD_URL_MACOS ? (
+              <a
+                href={import.meta.env.VITE_DOWNLOAD_URL_MACOS}
+                download
+                className="btn-icon"
+                title="Download for macOS"
+                style={{ textDecoration: 'none', fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.1)' }}
+              >
+                <span style={{ color: 'var(--primary)', fontWeight: 600 }}> macOS</span>
+              </a>
+            ) : (
+              <button
+                className="btn-icon"
+                title="macOS link not set"
+                onClick={() => alert("macOS download link is not configured. Please add VITE_DOWNLOAD_URL_MACOS to your Vercel Environment Variables.")}
+                style={{ fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.05)', border: 'none', cursor: 'pointer' }}
+              >
+                <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}> macOS</span>
+              </button>
+            )}
+
+            {import.meta.env.VITE_DOWNLOAD_URL_WINDOWS ? (
+              <a
+                href={import.meta.env.VITE_DOWNLOAD_URL_WINDOWS}
+                download
+                className="btn-icon"
+                title="Download for Windows"
+                style={{ textDecoration: 'none', fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.1)' }}
+              >
+                <span style={{ color: 'var(--primary)', fontWeight: 600 }}>⊞ Windows</span>
+              </a>
+            ) : (
+              <button
+                className="btn-icon"
+                title="Windows link not set"
+                onClick={() => alert("Windows download link is not configured. Please add VITE_DOWNLOAD_URL_WINDOWS to your Vercel Environment Variables.")}
+                style={{ fontSize: '0.8rem', width: 'auto', padding: '8px 12px', borderRadius: '20px', background: 'rgba(255,255,255,0.05)', border: 'none', cursor: 'pointer' }}
+              >
+                <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>⊞ Windows</span>
+              </button>
+            )}
           </div>
           <button
             className="btn-icon"
