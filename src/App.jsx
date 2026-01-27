@@ -79,7 +79,7 @@ function App() {
           </div>
           <div style={{ display: 'flex', gap: '10px' }}>
             <a
-              href="/downloads/InterviewTester.dmg"
+              href={import.meta.env.VITE_DOWNLOAD_URL_MACOS || "#"}
               download
               className="btn-icon"
               title="Download for macOS"
@@ -88,7 +88,7 @@ function App() {
               <span style={{ color: 'var(--primary)', fontWeight: 600 }}> macOS</span>
             </a>
             <a
-              href="/downloads/InterviewTester-Setup.exe"
+              href={import.meta.env.VITE_DOWNLOAD_URL_WINDOWS || "#"}
               download
               className="btn-icon"
               title="Download for Windows"
