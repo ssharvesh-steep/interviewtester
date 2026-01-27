@@ -8,6 +8,8 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
     const [isMicActive, setIsMicActive] = useState(false);
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
+    const [warnings, setWarnings] = useState(0);
+    const warningsRef = useRef(0);
 
     useEffect(() => {
         let stream = null;
@@ -54,12 +56,20 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
             }
         };
 
+        const handleBlur = () => {
+            warningsRef.current += 1;
+            setWarnings(warningsRef.current);
+            console.log(`%c[Proctoring] Warning: Window focus lost. Total warnings: ${warningsRef.current}`, "color: #ff5555; font-weight: bold;");
+        };
+
+        window.addEventListener('blur', handleBlur);
         startProctoring();
 
         return () => {
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
             }
+            window.removeEventListener('blur', handleBlur);
         };
     }, []);
 
@@ -96,7 +106,8 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
                     candidate_name: candidateName || 'Anonymous',
                     score: score,
                     recording_url: recordingUrl,
-                    status: 'completed'
+                    status: 'completed',
+                    warnings_count: warningsRef.current
                 });
 
                 if (dbError) {
@@ -129,6 +140,12 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
                         <Mic size={14} color={isMicActive ? "#50fa7b" : "#9ea3b0"} />
                         <span>MIC</span>
                     </div>
+                    {warnings > 0 && (
+                        <div className="status-item" style={{ background: 'rgba(255, 85, 85, 0.2)', padding: '2px 6px', borderRadius: '4px' }}>
+                            <AlertCircle size={14} color="#ff5555" />
+                            <span style={{ color: "#ff5555", fontWeight: 'bold' }}>{warnings} {warnings === 1 ? 'WARN' : 'WARNS'}</span>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="live-indicator">

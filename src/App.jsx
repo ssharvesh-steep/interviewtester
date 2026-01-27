@@ -14,16 +14,9 @@ function App() {
   const [candidateName, setCandidateName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Intentional Vulnerability: Expose answers in global window object
+  // Clean up global state on load
   useEffect(() => {
-    window.__QUIZ_VERSION__ = "1.0.4-PROD";
-    window.__DEBUG_MODE__ = true;
-
-    // This will be populated when the quiz starts
-    window.__QUIZ_DATA__ = null;
-
-    console.log("%c[System] Interview Tester loaded.", "color: #50fa7b; font-weight: bold;");
-    console.log("%c[System] Use window.__QUIZ_DATA__ to inspect current quiz set.", "color: #ff79c6;");
+    console.log("%c[System] Interview Tester loaded securely.", "color: #50fa7b; font-weight: bold;");
   }, []);
 
   const { ipcRenderer } = window.require ? window.require('electron') : {};

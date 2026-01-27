@@ -6,6 +6,7 @@ const SuperAdminDashboard = ({ onLogout }) => {
     const [subAdmins, setSubAdmins] = useState([]);
     const [newAdminUser, setNewAdminUser] = useState('');
     const [newAdminPass, setNewAdminPass] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -40,7 +41,7 @@ const SuperAdminDashboard = ({ onLogout }) => {
                 .from('admins')
                 .insert({
                     username: newAdminUser,
-                    password: newAdminPass, // Note: In production, hash this!
+                    password: newAdminPass, // SECURITY NOTE: In a real system, passwords MUST be hashed server-side (e.g., using bcrypt)
                     role: 'sub_admin'
                 });
 
@@ -104,13 +105,23 @@ const SuperAdminDashboard = ({ onLogout }) => {
                         </div>
                         <div className="input-group">
                             <label>Password</label>
-                            <input
-                                type="text"
-                                value={newAdminPass}
-                                onChange={e => setNewAdminPass(e.target.value)}
-                                placeholder="Secure password"
-                                required
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={newAdminPass}
+                                    onChange={e => setNewAdminPass(e.target.value)}
+                                    placeholder="Secure password"
+                                    required
+                                    style={{ width: '100%' }}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}
+                                >
+                                    {showPassword ? "Hide" : "Show"}
+                                </button>
+                            </div>
                         </div>
                         {error && <p style={{ color: '#ff5555', fontSize: '0.9rem' }}>{error}</p>}
                         <button disabled={loading} className="btn btn-primary" type="submit">
@@ -145,7 +156,7 @@ const SuperAdminDashboard = ({ onLogout }) => {
                                         <div>
                                             <div style={{ fontWeight: 600 }}>{admin.username}</div>
                                             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                                                Password: <span style={{ fontFamily: 'monospace' }}>{admin.password}</span>
+                                                Password: <span style={{ fontFamily: 'monospace' }}>••••••••</span>
                                             </div>
                                         </div>
                                     </div>

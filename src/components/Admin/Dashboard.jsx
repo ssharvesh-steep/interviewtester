@@ -11,13 +11,21 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
-            const { data: sessData } = await supabase.from('sessions').select('*').order('created_at', { ascending: false });
-            const { data: qData } = await supabase.from('questions').select('*').order('created_at', { ascending: true });
+            try {
+                const { data: sessData, error: sessError } = await supabase.from('sessions').select('*').order('created_at', { ascending: false });
+                const { data: qData, error: qError } = await supabase.from('questions').select('*').order('created_at', { ascending: true });
 
-            setSessions(sessData || []);
-            setQuestions(qData || []);
-            setLoading(false);
+                if (sessError) throw sessError;
+                if (qError) throw qError;
+
+                setSessions(sessData || []);
+                setQuestions(qData || []);
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                alert("Failed to load dashboard data: " + err.message);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchData();
@@ -290,9 +298,17 @@ const AdminDashboard = () => {
                                             <span style={{ fontWeight: 600 }}>{session.candidate_name || 'Anonymous'}</span>
                                             <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>{new Date(session.created_at).toLocaleDateString()}</span>
                                         </div>
-                                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '10px', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>Final Score</span>
-                                            <span style={{ fontWeight: 700, color: 'var(--secondary)', fontSize: '1.2rem' }}>{session.score} / 10</span>
+                                        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '10px', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>Final Score</span>
+                                                <span style={{ fontWeight: 700, color: 'var(--secondary)', fontSize: '1.2rem' }}>{session.score} / 10</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>System Warnings</span>
+                                                <span style={{ fontWeight: 700, color: session.warnings_count > 0 ? '#ff5555' : 'var(--primary)', fontSize: '1rem' }}>
+                                                    {session.warnings_count || 0}
+                                                </span>
+                                            </div>
                                         </div>
                                         {session.recording_url && (
                                             <a href={session.recording_url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
