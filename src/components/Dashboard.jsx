@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Play, Shield, Zap, Code, User, Mail, Phone, FileText, Edit2, Save, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-const Dashboard = ({ onStart, candidateName }) => {
+const Dashboard = ({ onStart, onPractice, candidateName }) => {
     const [loading, setLoading] = useState(true);
     const [profile, setProfile] = useState({
         full_name: '',
@@ -60,10 +60,11 @@ const Dashboard = ({ onStart, candidateName }) => {
 
             setProfile({ ...profile, ...updateData });
             setIsEditing(false);
-            alert('Profile updated successfully!');
+            setProfile({ ...profile, ...updateData });
+            setIsEditing(false);
+            console.log('Profile updated successfully!');
         } catch (error) {
             console.error('Error updating profile:', error.message);
-            alert(`Failed to update profile: ${error.message}\n\nPlease ensure your 'candidates' table has full_name, email, phone, and bio columns.`);
         }
     };
 
@@ -179,28 +180,85 @@ const Dashboard = ({ onStart, candidateName }) => {
                 </div>
 
                 {/* Status Cards */}
-                <div className="grid" style={{ alignContent: 'start', gridTemplateColumns: '1fr' }}>
-                    <div className="glass card">
-                        <Code color="#bd93f9" size={32} style={{ marginBottom: '1rem' }} />
-                        <h3>Secure Environment</h3>
-                        <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                            Multi-layered security protocols ensure the integrity of your technical evaluation.
-                        </p>
+                <div className="grid" style={{ alignContent: 'start', gridTemplateColumns: '1fr', gap: '2rem' }}>
+
+                    {/* Course Section */}
+                    <div style={{ display: 'grid', gap: '1rem' }}>
+                        <div className="glass card" style={{ cursor: 'pointer', borderColor: 'var(--primary)', display: 'flex', flexDirection: 'column', gap: '1rem' }} onClick={() => onPractice && onPractice('general')}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                <div style={{ background: 'rgba(80, 250, 123, 0.1)', padding: '12px', borderRadius: '12px' }}>
+                                    <Code color="#50fa7b" size={32} />
+                                </div>
+                                <div>
+                                    <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Full Course</h2>
+                                    <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Practice & Learn</p>
+                                </div>
+                            </div>
+                            <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                                Access the interactive coding environment to practice sample problems in multiple languages.
+                            </p>
+                            <button className="btn btn-primary" style={{ marginTop: 'auto' }}>
+                                Start Course <Play size={16} style={{ marginLeft: '8px' }} />
+                            </button>
+                        </div>
+
+                        {/* C Programming Special Course */}
+                        <div className="glass card" style={{ cursor: 'pointer', borderColor: '#ff79c6', display: 'flex', flexDirection: 'column', gap: '1rem' }} onClick={() => onPractice && onPractice('c-programming')}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                <div style={{ background: 'rgba(255, 121, 198, 0.1)', padding: '12px', borderRadius: '12px' }}>
+                                    <Code color="#ff79c6" size={32} />
+                                </div>
+                                <div>
+                                    <h2 style={{ margin: 0, fontSize: '1.5rem' }}>C Programming</h2>
+                                    <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Specialized Module</p>
+                                </div>
+                            </div>
+                            <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                                Focused C programming course with strict environment and specific challenges.
+                            </p>
+                            <button className="btn btn-secondary" style={{ marginTop: 'auto', background: 'rgba(255, 121, 198, 0.2)', color: '#ff79c6', border: '1px solid #ff79c6' }}>
+                                Start C Module <Play size={16} style={{ marginLeft: '8px' }} />
+                            </button>
+                        </div>
+
+                        {/* Python Programming Special Course */}
+                        <div className="glass card" style={{ cursor: 'pointer', borderColor: '#ffe873', display: 'flex', flexDirection: 'column', gap: '1rem' }} onClick={() => onPractice && onPractice('python')}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                <div style={{ background: 'rgba(255, 232, 115, 0.1)', padding: '12px', borderRadius: '12px' }}>
+                                    <Code color="#ffe873" size={32} />
+                                </div>
+                                <div>
+                                    <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Python</h2>
+                                    <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Data Structures & Algos</p>
+                                </div>
+                            </div>
+                            <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                                Master Python list comprehensions, dictionaries, and automation scripts.
+                            </p>
+                            <button className="btn btn-secondary" style={{ marginTop: 'auto', background: 'rgba(255, 232, 115, 0.2)', color: '#ffe873', border: '1px solid #ffe873' }}>
+                                Start Python <Play size={16} style={{ marginLeft: '8px' }} />
+                            </button>
+                        </div>
                     </div>
-                    <div className="glass card">
-                        <Shield color="#50fa7b" size={32} style={{ marginBottom: '1rem' }} />
-                        <h3>Anti-Cheat System</h3>
-                        <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                            Advanced proctoring algorithms track focus, clipboard activity, and network requests.
-                        </p>
+                </div>
+
+                {/* Test Section */}
+                <div className="glass card" style={{ cursor: 'pointer', borderColor: 'var(--accent)', display: 'flex', flexDirection: 'column', gap: '1rem' }} onClick={onStart}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <div style={{ background: 'rgba(189, 147, 249, 0.1)', padding: '12px', borderRadius: '12px' }}>
+                            <Shield color="#bd93f9" size={32} />
+                        </div>
+                        <div>
+                            <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Test</h2>
+                            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Certification Exam</p>
+                        </div>
                     </div>
-                    <div className="glass card">
-                        <Zap color="#ff79c6" size={32} style={{ marginBottom: '1rem' }} />
-                        <h3>Real-time Analysis</h3>
-                        <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                            Immediate feedback on algorithmic complexity and code efficiency provided post-test.
-                        </p>
-                    </div>
+                    <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                        Take the official certification exam in a secured proctoring environment. Ensure your camera and microphone are ready.
+                    </p>
+                    <button className="btn btn-secondary" style={{ marginTop: 'auto' }}>
+                        Start Assessment <Zap size={16} style={{ marginLeft: '8px' }} />
+                    </button>
                 </div>
             </div>
         </div>

@@ -11,6 +11,21 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
     const [warnings, setWarnings] = useState(0);
     const warningsRef = useRef(0);
 
+    // Kiosk Mode for Active Tests
+    useEffect(() => {
+        if (!isFinished && window.electronAPI) {
+            window.electronAPI.send('enter-kiosk');
+        }
+        return () => {
+            // Only exit kiosk if we are unmounting and strictly finishing, 
+            // but usually we want to keep it until they leave the page?
+            // Actually, we should release it when component unmounts.
+            if (window.electronAPI) {
+                window.electronAPI.send('exit-kiosk');
+            }
+        };
+    }, [isFinished]);
+
     useEffect(() => {
         let stream = null;
 
@@ -129,7 +144,7 @@ const Proctoring = ({ candidateName, score, isFinished }) => {
                         <span>{error}</span>
                     </div>
                 ) : (
-                    <video ref={videoRef} autoPlay muted playsInline className="proctor-video" />
+                    <video ref={videoRef} autoPlay muted playsInline className="proctor-video" style={{ display: 'none' }} />
                 )}
                 <div className="proctor-status">
                     <div className="status-item">

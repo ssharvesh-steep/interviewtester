@@ -15,13 +15,25 @@ function createWindow() {
         alwaysOnTop: false,
         frame: true,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
+            nodeIntegration: false,
+            contextIsolation: true,
+            preload: path.join(__dirname, 'preload.js')
         },
     });
 
     // Load the Vite dev server URL
     mainWindow.loadURL('http://localhost:5173');
+
+    // Auto-open DevTools when running in development (not packaged)
+    mainWindow.webContents.on('did-finish-load', () => {
+        if (!app.isPackaged) {
+            try {
+                mainWindow.webContents.openDevTools({ mode: 'detach' });
+            } catch (err) {
+                console.warn('Failed to open DevTools automatically:', err);
+            }
+        }
+    });
 
     // Prevent navigating away
     mainWindow.webContents.on('will-navigate', (event) => {
@@ -74,15 +86,23 @@ app.on('will-quit', () => {
 // IPC for kiosk control
 ipcMain.on('enter-kiosk', () => {
     if (mainWindow) {
+        // Simple Fullscreen (often safer than Kiosk on some Windows configs)
+        mainWindow.setFullScreen(true);
+        // Kiosk mode (Mac: strict, Win: no-frame fullscreen)
         mainWindow.setKiosk(true);
-        mainWindow.setAlwaysOnTop(true);
+        // 'screen-saver' level is highest on Mac, covers Dock/Menu
+        mainWindow.setAlwaysOnTop(true, 'screen-saver');
+        // Ensure it's visible
+        mainWindow.show();
+        mainWindow.focus();
     }
 });
 
 ipcMain.on('exit-kiosk', () => {
     if (mainWindow) {
-        mainWindow.setKiosk(false);
         mainWindow.setAlwaysOnTop(false);
+        mainWindow.setKiosk(false);
+        mainWindow.setFullScreen(false);
     }
 });
 
